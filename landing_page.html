@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Lead Form for CMA</title>
+		
+		<!--styling for the form-->
+		<style>
+			h1{
+				font-size:20px;
+				text-align:center;;
+			}
+			p{
+				text-align:center;
+				width: 100%;
+			}
+			#wrapper{
+				margin: 25px auto;
+				width:500px;
+				padding: 10px;
+				border: 2px solid black;
+			}
+			.content{
+				width:80%;
+				margin: 0 auto;
+				padding:5px;
+			}
+			label{
+				display:inline-block;				
+				margin-bottom:10px;
+			}
+			#submitBtn{
+				float: right;
+				padding: 0 50px 15px 0;
+			}
+		</style>
+		
+		<!--jQuery-->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  		
+		<!--Script for the incomplete form page reload or closing the window-->
+		<script>
+		//$(window).on('beforeunload', function() {
+		function incompleteForm(){
+			
+			var fname = document.getElementById('fname').value;
+			var lname = document.getElementById('lname').value;
+			var email = document.getElementById('email').value;
+			var phone_number = document.getElementById('phone_number').value;
+			var address = document.getElementById('address').value;
+			var city = document.getElementById('city').value;
+			var state = document.getElementById('state').value;
+			var zip = document.getElementById('zip').value;
+			var home_sqf = document.getElementById('home_sqft').value;
+			var datastring = 'fname='+fname+'lname='+lname+'email='+email+'phone_number='+phone_number+'address='+address+'city='+city+'state='+state+'zip='+zip+'home_sqft'+home_sqft;
+						
+				$.ajax({
+					type: "POST",
+					url: "incompleteForm.php",
+					data: datastring,
+					//test for connection
+					success: function(){
+						console.log(datastring);
+					},
+					async: false
+				});
+		}
+		</script>
+	</head>
+	
+	<!--Onunload to save data from the form if not submitted-->
+	<body onunload="incompleteForm()" beforeunload="incompleteForm()">
+		<!--Form container-->
+		<div id="wrapper">
+		<h1>Get your FREE Comparative Market Analysts (CMA)</h1>
+		<p>Just fill out the following form and receive yours Today</p>  
+		<!--This is the form for the user to input data -->
+		<form id="lead_form" action="recieved.php" method="post">
+			<!--The user's first and last name-->
+			<div class="content">
+				<label>First Name: </label>
+				<input type="text" name="fname" id="fname" required /><br />
+				<label>Last Name: </label>
+				<input type="text" name="lname" id="lname" required />
+			</div>
+	
+			<!--The user's email and phone number-->
+			<div class="content">
+				<label>E-Mail: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type='text' name="email" id="email" required /><br />
+				<label>Phone Number: </label>
+				<input type='text' name="phone_number" id="phone_number" required/>
+			</div>
+	
+			<!--The user's address and home sqft-->
+			<div class="content">
+				<label>Address:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type='text' name="address" id="address" required /><br />
+				<label>City:</label>
+				<input type="text" name="city" id="city" required /><br />
+				<label>State</label>
+				<input type="text" name="state" id="state" required /><br />
+				<label>Zip Code: </label>
+				<input type="text" name="zip" id="zip" required /><br />
+				<label>Home SQFT: </label>
+				<input type="text" name="home_sqft" id="home_sqft" required />
+			</div>
+	
+			<!--The user submit button that sends the form input to the recieved.php file for processing after the form has been validated-->
+			<div id="submitBtn">
+				<input type="submit" value="Submit" />
+			</div>
+			
+			<!--Clear out the float-->
+			<div style="float:none;clear:both;"></div>
+			
+		</form>
+		</div>
+	</body>
+</html>
