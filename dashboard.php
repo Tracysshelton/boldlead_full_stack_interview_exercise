@@ -29,7 +29,7 @@
 				$conn = DB_Connection();
 				
 				//Select the table
-				$sql = "SELECT * FROM newleads";
+				$sql = "SELECT * FROM newleads ORDER BY lname ASC";
 				
 				//Reading the Query Data
 				$query = mysqli_query($conn, $sql);
