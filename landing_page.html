@@ -50,13 +50,23 @@
 			var city = document.getElementById('city').value;
 			var state = document.getElementById('state').value;
 			var zip = document.getElementById('zip').value;
-			var home_sqf = document.getElementById('home_sqft').value;
+			var home_sqft = document.getElementById('home_sqft').value;
 			var datastring = 'fname='+fname+'lname='+lname+'email='+email+'phone_number='+phone_number+'address='+address+'city='+city+'state='+state+'zip='+zip+'home_sqft'+home_sqft;
 						
 				$.ajax({
 					type: "POST",
 					url: "incompleteForm.php",
-					data: datastring,
+					data: {
+						"fname": fname,
+						"lname": lname,
+						"email": email,
+						"phone_number": phone_number,
+						"address": address,
+						"city": city,
+						"state": state,
+						"zip": zip,
+						"home_sqft": home_sqft
+					},
 					//test for connection
 					success: function(){
 						console.log(datastring);
